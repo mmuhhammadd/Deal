@@ -1,0 +1,59 @@
+{% extends "auctions/layout.html" %}
+{% block title %}Create Listing{% endblock %}
+{% block style %}
+<style>
+form {
+    width: 700px;
+    margin-top: 30px;
+    padding: 10px;
+    }
+form li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 90px;
+    border-left: 3px solid #5EB1BF;
+    padding-left: 5px;
+}
+
+form li input {
+    position: absolute;
+    left: 200px;
+    width: 400px;
+    border: 1px solid #172121;
+}
+form li textarea {
+    position: absolute;
+    left: 200px;
+    width: 400px;
+    height: 100px;
+    border: 1px solid #172121;
+}
+form li select {
+    position: absolute;
+    left: 200px;
+    width: 400px;
+    border: 1px solid #172121;
+}
+#button {
+    background-color: #5EB1BF;
+    border: 1px solid #172121;
+    color: white;
+    padding: 5px;
+    width: 70px;
+    font-weight: bold;
+}
+form li input[type=text], form li select, form li textarea, form li input[type=number], form li input[type=url] {
+    padding: 7px 7px;
+}
+</style>
+{% endblock %}
+{% block body %}
+    <h1>Create listing</h1>
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="button" type="submit" value="Create">
+    </form>
+{% endblock %}

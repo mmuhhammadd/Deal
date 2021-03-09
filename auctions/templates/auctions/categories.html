@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %}
+{% block title %}Categories{% endblock %}
+{% block style %}
+<style>
+    .main ul li {
+        list-style: circle;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<h1>All Categories:</h1>
+<ul>
+    {% for category in categories %}
+    <li><a href="{% url 'category' category.id %}">{{ category.category }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

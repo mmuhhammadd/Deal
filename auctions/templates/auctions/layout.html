@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Deal{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        {% if not user.is_authenticated %}
+            <div id="not-signed"><a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}"> Register</a> to enable all features.</div>
+        {% endif %}
+        <div class="header">
+            <div id="logo">
+                <h1>Deal</h1>
+            </div>
+            {% if user.is_authenticated %}
+                <div id="logout"><a href="{% url 'logout' %}">Log Out</a></div>
+            {% endif %}
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" sidebar col-sm-2">
+                    <ul>
+                        <li><a href="{% url 'index' %}">Active listings</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'create' %}">Create listing</a></li>
+                            <li><a href="{% url 'mylistings' %}">My listings</a></li>
+                            <li><a href="{% url 'mybids' %}">My bids</a></li>
+                            <li><a href="{% url 'watchlist' %}">Watchlist</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'categories' %}">Categories</a></li>
+                    </ul>
+                </div>
+                <div class="main col-sm-10">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
